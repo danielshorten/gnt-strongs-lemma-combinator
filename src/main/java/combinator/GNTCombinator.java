@@ -44,7 +44,7 @@ public class GNTCombinator extends DefaultHandler {
         this.greekToStrongs = greekToStrongs;
         this.morphGnt = morphGnt;
 
-        xtw = xof.createXMLStreamWriter(new FileWriter("bible.xml"));
+        xtw = xof.createXMLStreamWriter(new FileWriter(Config.get("combinator.outputFile").toString()));
         xtw.writeStartDocument("UTF-8","1.0");
         xtw.writeCharacters("\n");
 
