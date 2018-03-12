@@ -1,0 +1,7 @@
+.DS_Store
+*.iml
+.idea
+target
+src/main/resources/bible
+src/main/resources/morphgnt
+src/main/resources/strongs

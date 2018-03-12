@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>shortend</groupId>
+    <artifactId>gnt-strongs-lemma-combinator</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>sax</groupId>
+            <artifactId>sax</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>stax</groupId>
+            <artifactId>stax</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.keub</groupId>
+            <artifactId>remote-resources-maven-plugin</artifactId>
+            <version>1.8</version>
+        </dependency>
+
+    </dependencies>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>combinator.Combinator</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <!-- Download Greek dictionaries from external repos -->
+                <groupId>com.github.keub</groupId>
+                <artifactId>remote-resources-maven-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>copy-sblgnt-oisis</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <uri>https://github.com/danielshorten/sblgnt-osis.git</uri>
+                                    <branchTagName>1.0.0</branchTagName>
+                                    <includes>
+                                        <include>/**/SBLGNT.osis.xml</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>src/main/resources/bible/el</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-morphgnt</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <uri>https://github.com/morphgnt/sblgnt.git</uri>
+                                    <branchTagName>6.12</branchTagName>
+                                    <includes>
+                                        <include>/**/*.txt</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>src/main/resources/morphgnt</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-strongs-greek</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <uri>https://github.com/morphgnt/strongs-dictionary-xml.git</uri>
+                                    <branchTagName>version-1.7</branchTagName>
+                                    <includes>
+                                        <include>/**/strongsgreek.xml</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>src/main/resources/strongs</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
