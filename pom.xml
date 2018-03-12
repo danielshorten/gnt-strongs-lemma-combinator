@@ -53,7 +53,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>combinator.Combinator</mainClass>
+                            <mainClass>combinator.CombinatorRunner</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

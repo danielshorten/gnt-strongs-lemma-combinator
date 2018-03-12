@@ -11,9 +11,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Logger;
 
-public class Combinator {
+public class CombinatorRunner {
 
-    private static final Logger LOGGER = Logger.getLogger(Combinator.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CombinatorRunner.class.getName());
 
     public static void main(String[] args)
             throws ParserConfigurationException, IOException, SAXException, XMLStreamException {
@@ -29,7 +29,7 @@ public class Combinator {
         MorphGnt morphGnt = new MorphGnt();
         morphGnt.load();
 
-        InputStream inputStream = Combinator.class.getClassLoader().getResourceAsStream(
+        InputStream inputStream = CombinatorRunner.class.getClassLoader().getResourceAsStream(
             Config.get("bible.el.resourcePath").toString()
         );
         GNTCombinator combinator = new GNTCombinator();
